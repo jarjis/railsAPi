@@ -1,0 +1,135 @@
+  [1m[36m (1.5ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar(255), "last_name" varchar(255), "role" varchar(255) NOT NULL, "email" varchar(255) DEFAULT '' NOT NULL, "encrypted_password" varchar(255) DEFAULT '' NOT NULL, "authentication_token" varchar(255)) [0m
+  [1m[35m (1.1ms)[0m  CREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")
+  [1m[36m (1.1ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (1.2ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.1ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (1.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130816123807')
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36m (1.7ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar(255), "last_name" varchar(255), "role" varchar(255) NOT NULL, "email" varchar(255) DEFAULT '' NOT NULL, "encrypted_password" varchar(255) DEFAULT '' NOT NULL, "authentication_token" varchar(255)) [0m
+  [1m[35m (1.4ms)[0m  CREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")
+  [1m[36m (1.2ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (1.1ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.1ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (1.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130816123807')
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (1.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT 1 AS one FROM "users" WHERE "users"."email" = 'user@example.com' LIMIT 1
+Binary data inserted for `string` type on column `encrypted_password`
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "users" ("email", "encrypted_password", "role") VALUES (?, ?, ?)[0m  [["email", "user@example.com"], ["encrypted_password", "$2a$04$j4LSBIu3UOJJQac9b4hUF.ppo6FBPjdvZh6vG4.CqQxl0Id/TEuIW"], ["role", "user"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.4ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT 1 AS one FROM "users" WHERE "users"."email" = 'user@example.com' LIMIT 1
+Binary data inserted for `string` type on column `encrypted_password`
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "users" ("email", "encrypted_password", "role") VALUES (?, ?, ?)[0m  [["email", "user@example.com"], ["encrypted_password", "$2a$04$2Zp.pk7X0b8vB4cGjNsWhOzm30ZFiLbNHLCS2RXs6PvlV1CWCrPxe"], ["role", "user"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.8ms)[0m  [1mrollback transaction[0m
+  [1m[36m (0.5ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+Started POST "/api/users" for 127.0.0.1 at 2014-10-16 19:23:15 -0400
+Processing by Api::V1::CustomDevise::RegistrationsController#create as JSON
+  Parameters: {"user"=>{"first_name"=>"Saul", "last_name"=>"Hudson", "email"=>"slash@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."authentication_token" = 'Cj3ahzHjgfk9tw38PWZS' LIMIT 1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT 1 AS one FROM "users" WHERE "users"."email" = 'slash@gmail.com' LIMIT 1
+Binary data inserted for `string` type on column `encrypted_password`
+  [1m[36mSQL (0.8ms)[0m  [1mINSERT INTO "users" ("authentication_token", "email", "encrypted_password", "first_name", "last_name", "role") VALUES (?, ?, ?, ?, ?, ?)[0m  [["authentication_token", "Cj3ahzHjgfk9tw38PWZS"], ["email", "slash@gmail.com"], ["encrypted_password", "$2a$04$7u1uu0uxF39awcL2Ir6X.OJ/ryoikogdMyGU0.L26I4FUjw9KGczm"], ["first_name", "Saul"], ["last_name", "Hudson"], ["role", "user"]]
+Completed 201 Created in 132ms (Views: 0.4ms | ActiveRecord: 5.8ms)
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."email" = 'slash@gmail.com' ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."first_name" = 'Saul' AND "users"."last_name" = 'Hudson' AND "users"."email" = 'slash@gmail.com'[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (2.5ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+Started POST "/api/users" for 127.0.0.1 at 2014-10-16 19:23:15 -0400
+Processing by Api::V1::CustomDevise::RegistrationsController#create as JSON
+  Parameters: {"user"=>{"first_name"=>"Kobe", "last_name"=>"Bryant", "email"=>"kobe@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."authentication_token" = '4Ukd7CxSKu9CWYKxzp8A' LIMIT 1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'kobe@gmail.com' LIMIT 1[0m
+Completed 422 Unprocessable Entity in 60ms (Views: 0.2ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.1ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT 1 AS one FROM "users" WHERE "users"."email" = 'user@gmail.com' LIMIT 1
+Binary data inserted for `string` type on column `encrypted_password`
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "users" ("email", "encrypted_password", "first_name", "last_name", "role") VALUES (?, ?, ?, ?, ?)[0m  [["email", "user@gmail.com"], ["encrypted_password", "$2a$04$f7OUcDSTpk01KpXjiujCd.hwpMRuBwMqIkgTxTfHZ8LBWBFtDHqZy"], ["first_name", "Adam"], ["last_name", ""], ["role", "user"]]
+Started POST "/api/users" for 127.0.0.1 at 2014-10-16 19:23:15 -0400
+Processing by Api::V1::CustomDevise::RegistrationsController#create as JSON
+  Parameters: {"user"=>{"first_name"=>"Kobe", "last_name"=>"Bryant", "email"=>"user@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users" WHERE "users"."authentication_token" = 'dAkJ9yRBWyHFroyEsoAw' LIMIT 1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'user@gmail.com' LIMIT 1[0m
+Completed 422 Unprocessable Entity in 6ms (Views: 0.2ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.2ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.6ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT 1 AS one FROM "users" WHERE "users"."email" = 'user1@gmail.com' LIMIT 1
+Binary data inserted for `string` type on column `encrypted_password`
+  [1m[36mSQL (3.0ms)[0m  [1mINSERT INTO "users" ("authentication_token", "email", "encrypted_password", "first_name", "id", "last_name", "role") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["authentication_token", "auth_token_123"], ["email", "user1@gmail.com"], ["encrypted_password", "$2a$04$1I72l1Z00ndVd7s6PrGqwuK05/ohM9LhrIEg8hv.Ly2kCg7V3eyCu"], ["first_name", "First"], ["id", 10], ["last_name", "User"], ["role", "user"]]
+  [1m[35mUser Exists (0.1ms)[0m  SELECT 1 AS one FROM "users" WHERE "users"."email" = 'user2@gmail.com' LIMIT 1
+Binary data inserted for `string` type on column `encrypted_password`
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("authentication_token", "email", "encrypted_password", "first_name", "id", "last_name", "role") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["authentication_token", "auth_token_223"], ["email", "user2@gmail.com"], ["encrypted_password", "$2a$04$nof9QrC6baAeQy1Ts0f8auQgiREAfrN.THI8nBnvUPNczuZa1nfCW"], ["first_name", "Second"], ["id", 11], ["last_name", "User"], ["role", "user"]]
+  [1m[35mUser Exists (0.1ms)[0m  SELECT 1 AS one FROM "users" WHERE "users"."email" = 'user3@gmail.com' LIMIT 1
+Binary data inserted for `string` type on column `encrypted_password`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("authentication_token", "email", "encrypted_password", "first_name", "id", "last_name", "role") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["authentication_token", "auth_token_323"], ["email", "user3@gmail.com"], ["encrypted_password", "$2a$04$ReXJQTWku4ybYm7Udof2NOClVhdHKiSMvAF5T0V6C04VXp0OpRGMS"], ["first_name", "Third"], ["id", 12], ["last_name", "User"], ["role", "user"]]
+  [1m[35mUser Exists (0.3ms)[0m  SELECT 1 AS one FROM "users" WHERE "users"."email" = 'user4@gmail.com' LIMIT 1
+Binary data inserted for `string` type on column `encrypted_password`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("authentication_token", "email", "encrypted_password", "first_name", "id", "last_name", "role") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["authentication_token", "auth_token_423"], ["email", "user4@gmail.com"], ["encrypted_password", "$2a$04$ohMzToPDhDlTUQvKX6gvfuPHVOHof/Gslvtcu2R.lpiDoTXQvG.LC"], ["first_name", "Fourth"], ["id", 13], ["last_name", "User"], ["role", "user"]]
+  [1m[35mUser Exists (0.1ms)[0m  SELECT 1 AS one FROM "users" WHERE "users"."email" = 'user5@gmail.com' LIMIT 1
+Binary data inserted for `string` type on column `encrypted_password`
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("authentication_token", "email", "encrypted_password", "first_name", "id", "last_name", "role") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["authentication_token", "auth_token_523"], ["email", "user5@gmail.com"], ["encrypted_password", "$2a$04$/iacQF1.lSgYwEApqQwUzecgmWFJK3m.CLUb7.48l7GFTQuFTAmY2"], ["first_name", "Fifth"], ["id", 14], ["last_name", "User"], ["role", "admin"]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "users"
+Started GET "/api/users" for 127.0.0.1 at 2014-10-16 19:23:16 -0400
+Processing by Api::V1::UsersController#index as JSON
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."authentication_token" = 'auth_token_523' LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users"
+Completed 200 OK in 7ms (Views: 2.5ms | ActiveRecord: 0.3ms)
+  [1m[36m (0.3ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.6ms)[0m  rollback transaction
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'user1@gmail.com' LIMIT 1[0m
+Binary data inserted for `string` type on column `encrypted_password`
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "users" ("authentication_token", "email", "encrypted_password", "first_name", "id", "last_name", "role") VALUES (?, ?, ?, ?, ?, ?, ?)  [["authentication_token", "auth_token_123"], ["email", "user1@gmail.com"], ["encrypted_password", "$2a$04$BHOKft1VI6s5D29kEeGsSOpJ8/Z.AJ5R4oxdCrewNtSzKi4lTokb."], ["first_name", "First"], ["id", 10], ["last_name", "User"], ["role", "user"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'user2@gmail.com' LIMIT 1[0m
+Binary data inserted for `string` type on column `encrypted_password`
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("authentication_token", "email", "encrypted_password", "first_name", "id", "last_name", "role") VALUES (?, ?, ?, ?, ?, ?, ?)  [["authentication_token", "auth_token_223"], ["email", "user2@gmail.com"], ["encrypted_password", "$2a$04$oHyQz7We6UUGxl0gc5M8Ce5z2VHGq5U6URjdU4qUxAk8Y8NiaLGc2"], ["first_name", "Second"], ["id", 11], ["last_name", "User"], ["role", "user"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'user3@gmail.com' LIMIT 1[0m
+Binary data inserted for `string` type on column `encrypted_password`
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("authentication_token", "email", "encrypted_password", "first_name", "id", "last_name", "role") VALUES (?, ?, ?, ?, ?, ?, ?)  [["authentication_token", "auth_token_323"], ["email", "user3@gmail.com"], ["encrypted_password", "$2a$04$PsvMoo8p6D3luT.r7Kt7L.J81R6NgbzfVssco4If7XKSCjNgt6e82"], ["first_name", "Third"], ["id", 12], ["last_name", "User"], ["role", "user"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'user4@gmail.com' LIMIT 1[0m
+Binary data inserted for `string` type on column `encrypted_password`
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "users" ("authentication_token", "email", "encrypted_password", "first_name", "id", "last_name", "role") VALUES (?, ?, ?, ?, ?, ?, ?)  [["authentication_token", "auth_token_423"], ["email", "user4@gmail.com"], ["encrypted_password", "$2a$04$2AR/CrIadfKSgbmxoDIuBudXJu8xQf8Q5r/600w70Z3XykzR9wiCu"], ["first_name", "Fourth"], ["id", 13], ["last_name", "User"], ["role", "user"]]
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'user5@gmail.com' LIMIT 1[0m
+Binary data inserted for `string` type on column `encrypted_password`
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("authentication_token", "email", "encrypted_password", "first_name", "id", "last_name", "role") VALUES (?, ?, ?, ?, ?, ?, ?)  [["authentication_token", "auth_token_523"], ["email", "user5@gmail.com"], ["encrypted_password", "$2a$04$ZhoORC0BD9RftdLoTKnZOuFB.yubMvNWHkgjyRs.yOjJWaMzu3eZi"], ["first_name", "Fifth"], ["id", 14], ["last_name", "User"], ["role", "admin"]]
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "users"[0m
+Started GET "/api/users" for 127.0.0.1 at 2014-10-16 19:23:16 -0400
+Processing by Api::V1::UsersController#index as JSON
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."authentication_token" = 'auth_token_123' LIMIT 1
+Completed 403 Forbidden in 6ms (Views: 0.3ms | ActiveRecord: 0.2ms)
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.6ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+Started GET "/api/users" for 127.0.0.1 at 2014-10-16 19:23:16 -0400
+Processing by Api::V1::UsersController#index as JSON
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."authentication_token" = 'invalid_auth_token' LIMIT 1[0m
+Completed 401 Unauthorized in 4ms
+  [1m[35m (0.1ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
